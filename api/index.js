@@ -13,11 +13,6 @@ app.use(express.json({
     type: "*/*"
 }))
 
-
-app.get('/api', (req, res)=>{
-    res.send("Hola mundo")
-})
-
 app.get('/', (req, res)=>{
     res.send("Hola mundo")
 })
