@@ -13,9 +13,14 @@ app.use(express.json({
     type: "*/*"
 }))
 
-app.get('/', (req, res)=>{
+app.get('/a', (req, res)=>{
     res.send("Hola mundo")
 })
 
-app.listen(port)
 
+app.get('/api', (req, res)=>{
+    res.send("Hola mundo")
+})
+
+
+app.listen(port)
