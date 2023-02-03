@@ -9,10 +9,11 @@ const app = express()
 const port = process.env.PORT || 3000;
 
 const pool = new Pool({
-    connectionString: process.env.db_pg,
-    ssl: {
-      rejectUnauthorized: false
-    }
+    host: signerOptions.peanut.db.elephantsql.com,
+    port: signerOptions.5432,
+    user: signerOptions.kdrmaqhb,
+    database: 'kdrmaqhb',
+    password: IiD8MHE7G_U4MnOYSmrk9z6VTKkS-t28,
 })
 
 app.use(bodyParser.urlencoded({ extended: false }))
