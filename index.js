@@ -25,11 +25,10 @@ app.get('/', (req, res) => {
 })
 
 app.post('/create', async (req, res) => {
-    const {TIEMPO, TEMPERATURA, HUMEDAD, LUZ, PUMP} = req.body;
+    const {tiempo, temperatura, humedad, luminosidad, bomba} = req.body;
     const client = await pool.connect();
     try {
-      await client.query(`INSERT INTO mds (TIEMPO, TEMPERATURA, HUMEDAD, LUZ, PUMP) VALUES('${TIEMPO}', ${TEMPERATURA} , ${HUMEDAD} , ${LUZ} , '${PUMP}')`);
-      res.send('NUEVOS DATOS CREADOS');
+      await client.query(`INSERT INTO stats (tiempo, temperatura, humedad, luminosidad, bomba) VALUES('${tiempo}', ${temperatura} , ${humedad} , ${luminosidad} , '${bomba}')`);
     } finally {
       client.release();
     }
@@ -38,7 +37,7 @@ app.post('/create', async (req, res) => {
   app.get('/read', async (req, res) => {
     try {
       const client = await pool.connect();
-      const { rows } = await client.query('SELECT * FROM mds s');
+      const { rows } = await client.query('SELECT * FROM stats s');
       res.send(rows);
     } catch (error) {
       console.error(error);
@@ -48,49 +47,10 @@ app.post('/create', async (req, res) => {
     }
   });
   
-  app.get('/read_last_20', async (req, res) => {
+  app.get('/read_4', async (req, res) => {
     try {
       const client = await pool.connect();
-      const { rows } = await client.query('SELECT * FROM mds ORDER BY id DESC LIMIT 20');
-      res.send(rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Error reading from database' });
-    } finally {
-      client.release();
-    }
-  });
-  
-  app.get('/lumi', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const { rows } = await client.query('SELECT LUZ FROM MDS ORDER BY id DESC LIMIT 1');
-      res.send(rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Error reading from database' });
-    } finally {
-      client.release();
-    }
-  });
-  
-  app.get('/temp', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const { rows } = await client.query('SELECT TEMPERATURA FROM MDS ORDER BY id DESC LIMIT 1');
-      res.send(rows);
-    } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: 'Error reading from database' });
-    } finally {
-      client.release();
-    }
-  });
-  
-  app.get('/hume', async (req, res) => {
-    try {
-      const client = await pool.connect();
-      const { rows } = await client.query('SELECT HUMEDAD FROM MDS ORDER BY id DESC LIMIT 1');
+      const { rows } = await client.query('SELECT * FROM stats ORDER BY id DESC LIMIT 4');
       res.send(rows);
     } catch (error) {
       console.error(error);
