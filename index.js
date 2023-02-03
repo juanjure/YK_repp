@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 })
 
 app.get(
-    '/',
+    '/api',
     (request, response) => {
         response.send('pagina Principal')
     }
