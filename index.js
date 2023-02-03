@@ -16,7 +16,7 @@ app.use(express.json({
 }))
 
 
-app.use(express.static('web'));
+app.use(express.static('public'));
 
 app.get('/', (req, res) => {
     res.sendFile('index.html', {root: path.join(__dirname, 'web')})
@@ -27,10 +27,5 @@ app.get('/api',(req,res)=>{
     //console.log("estas en api")
 })
 
+app.listen(port)
 
-
-app.listen(port, () => {
-    console.log(`Example app listening on port ${port}`)
-})
-
-module.exports = app;
