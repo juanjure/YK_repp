@@ -1,20 +1,14 @@
 require('dotenv').config()
 const express = require('express')
+const bodyParser = require("body-parser");
 const path = require('path');
 const router = express.Router();
 const app = express()
 
+const port = process.env.PORT || 3000;
 
-app.use(
-    express.urlencoded({
-        extended: true
-    })
-)
-
-app.use(express.json({
-    type: "*/*"
-}))
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static('public'));
 
@@ -23,11 +17,16 @@ app.get('/', (req, res) => {
 })
 
 app.get(
-    '/api',
+    '/',
     (request, response) => {
         response.send('pagina Principal')
     }
 );
 
-app.listen(port)
 
+
+app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+})
+
+module.exports = app;
