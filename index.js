@@ -29,7 +29,7 @@ app.post('/create', async (req, res) => {
     const {tiempo, temperatura, humedad, luminosidad, bomba} = req.body
     const client = await pool.connect()
     try {
-      await client.query(`INSERT INTO stats (tiempo, temperatura, humedad, luminosidad, bomba) VALUES('${tiempo}', ${temperatura} , ${humedad} , ${luminosidad} , '${bomba}')`)
+      await client.query(`INSERT INTO mediciones (tiempo, temperatura, humedad, luminosidad, bomba) VALUES('${tiempo}', ${temperatura} , ${humedad} , ${luminosidad} , '${bomba}')`)
     } finally {
       client.release()
     }
@@ -49,7 +49,7 @@ app.get('/activate', async (req, res) => {
 app.get('/read', async (req, res) => {
     try {
         const client = await pool.connect()
-        const { rows } = await client.query('SELECT * FROM stats s')
+        const { rows } = await client.query('SELECT * FROM mediciones')
         res.send(rows)
     } catch (error) {
         console.error(error)
@@ -62,7 +62,7 @@ app.get('/read', async (req, res) => {
 app.get('/read_4', async (req, res) => {
     try {
         const client = await pool.connect()
-        const { rows } = await client.query('SELECT * FROM stats ORDER BY id DESC LIMIT 4');
+        const { rows } = await client.query('SELECT * FROM mediciones ORDER BY id DESC LIMIT 4');
         res.send(rows)
     } catch (error) {
         console.error(error)
