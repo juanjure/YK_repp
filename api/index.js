@@ -19,9 +19,9 @@ app.use(express.json({
 app.use(express.static(path.join(__dirname, '/../web')));
 
 
-app.get('*',(req,res)=>{
+app.get('/',(req,res)=>{
     //Envia index.html a la solicitud
-    res.render(__dirname,'../web/', 'index.html');
+    res.render(__dirname,'../web', 'index.html');
 })
 
 
