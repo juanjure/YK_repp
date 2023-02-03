@@ -1,13 +1,21 @@
 require('dotenv').config()
 const express = require('express')
-const bodyParser = require("body-parser");
-const path = require('path');
-const router = express.Router();
+const bodyParser = require("body-parser")
+const path = require('path')
+const router = express.Router()
+const { Pool } = require('pg')
 const app = express()
 
 const port = process.env.PORT || 3000;
 
-app.use(bodyParser.urlencoded({ extended: false }));
+const pool = new Pool({
+    connectionString: process.env.db_pg,
+    ssl: {
+      rejectUnauthorized: false
+    }
+});
+
+app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 app.use(express.static('public'));
