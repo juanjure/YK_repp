@@ -34,30 +34,41 @@ app.post('/create', async (req, res) => {
       client.release()
     }
 })
+
+app.get('/activate', async (req, res) => {
+    try {
+        res.send('1')
+    } catch (error) {
+        console.error(error)
+        res.status(500).send({ error: 'Error buttom' })
+    }
+})
+
+
   
 app.get('/read', async (req, res) => {
     try {
-      const client = await pool.connect()
-      const { rows } = await client.query('SELECT * FROM stats s')
-      res.send(rows)
+        const client = await pool.connect()
+        const { rows } = await client.query('SELECT * FROM stats s')
+        res.send(rows)
     } catch (error) {
-      console.error(error)
-      res.status(500).send({ error: 'Error reading from database' })
+        console.error(error)
+        res.status(500).send({ error: 'Error reading from database' })
     } finally {
-      client.release()
+        client.release()
     }
 });
   
 app.get('/read_4', async (req, res) => {
     try {
-      const client = await pool.connect()
-      const { rows } = await client.query('SELECT * FROM stats ORDER BY id DESC LIMIT 4');
-      res.send(rows)
+        const client = await pool.connect()
+        const { rows } = await client.query('SELECT * FROM stats ORDER BY id DESC LIMIT 4');
+        res.send(rows)
     } catch (error) {
-      console.error(error)
-      res.status(500).send({ error: 'Error reading from database' })
+        console.error(error)
+        res.status(500).send({ error: 'Error reading from database' })
     } finally {
-      client.release()
+        client.release()
     }
 });
 
