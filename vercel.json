@@ -2,7 +2,7 @@
   "version": 2,
   "name": "ykproject",
   "builds": [
-      { "use": "@vercel/static-build", "src": "package.json"}
+      { "use": "@vercel/static-build", "src": "api/package.json"}
   ],
   "routes": [
       {
@@ -15,7 +15,7 @@
       },
       {
           "src": "/.*",
-          "dest": "index.html"
+          "dest": "web/index.html"
       }
   ]
 } 
