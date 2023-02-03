@@ -33,9 +33,9 @@ app.post('/create', async (req, res) => {
     } finally {
       client.release()
     }
-  })
+})
   
-  app.get('/read', async (req, res) => {
+app.get('/read', async (req, res) => {
     try {
       const client = await pool.connect()
       const { rows } = await client.query('SELECT * FROM stats s')
@@ -46,9 +46,9 @@ app.post('/create', async (req, res) => {
     } finally {
       client.release()
     }
-  });
+});
   
-  app.get('/read_4', async (req, res) => {
+app.get('/read_4', async (req, res) => {
     try {
       const client = await pool.connect()
       const { rows } = await client.query('SELECT * FROM stats ORDER BY id DESC LIMIT 4');
@@ -59,7 +59,7 @@ app.post('/create', async (req, res) => {
     } finally {
       client.release()
     }
-  });
+});
 
 
 
