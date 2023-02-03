@@ -7,7 +7,7 @@ const app = express()
 
 app.use(
     express.urlencoded({
-        extended: false
+        extended: true
     })
 )
 
@@ -19,7 +19,7 @@ app.use(express.json({
 app.use(express.static('public'));
 
 app.get('/', (req, res) => {
-    res.sendFile('index.html', {root: path.join(__dirname, 'web')})
+    res.sendFile('index.html', {root: path.join(__dirname, 'public')})
 })
 
 app.get('/api',(req,res)=>{
